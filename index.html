@@ -1,0 +1,240 @@
+﻿<!DOCTYPE html>
+<!-- saved from url=(0025)http://192.168.1.83:8081/ -->
+<html class=" js flexbox flexboxlegacy canvas canvastext webgl touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>聊聊吧扑克计数神器</title>
+    <link href="Content/Site.css" rel="stylesheet" type="text/css">
+    <link href="Content/bootstrap.css" rel="stylesheet" type="text/css">
+    <style>
+        .modal-open {
+            margin-right: 0px;
+        }
+
+        .header-item {
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+        }
+
+        .header-input {
+            height: 100%;
+            width: 110%;
+        }
+
+        td {
+            width: 17%;
+            text-align: left;
+            font-size: 18px;
+        }
+
+        .displayer {
+            color: white;
+        }
+
+        .header-cell {
+            padding-left: 5px;
+            padding-right: 5px;
+            padding-top: 5px;
+        }
+
+        .win {
+            color: green;
+        }
+
+        .dob {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 header-item header-cell" style="color:white">玩家</div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 header-item header-cell"><input type="text" class="header-input playerName" id="p1" displayer="countName1"></div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 header-item header-cell"><input type="text" class="header-input playerName" id="p2" displayer="countName2"></div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 header-item header-cell"><input type="text" class="header-input playerName" id="p3" displayer="countName3"></div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 header-item header-cell"><input type="text" class="header-input playerName" id="p4" displayer="countName4"></div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 header-cell">
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal" style="margin:5px 5px 0px 0px">计分</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container body-content">
+        
+
+
+<div class="row">
+    <div class="col-xs-12">
+        <table style="width:100%" id="countTable">
+        </table>
+    </div>
+</div>
+
+
+        <hr>
+        <footer class="navbar-fixed-bottom">
+            <div style="background-color:#333333;height:3.5em;" class="container">
+                <div class="row">
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="color:white;line-height:3.5em">牌数</div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 header-item" style="padding-left:5px;padding-right:5px;padding-top:5px;"><input type="text" class="header-input iCount" id="c1"></div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 header-item" style="padding-left:5px;padding-right:5px;padding-top:5px;"><input type="text" class="header-input iCount" id="c2"></div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 header-item" style="padding-left:5px;padding-right:5px;padding-top:5px;"><input type="text" class="header-input iCount" id="c3"></div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 header-item" style="padding-left:5px;padding-right:5px;padding-top:5px;"><input type="text" class="header-input iCount" id="c4"></div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                        <button type="button" id="btn_add" class="btn btn-success" style="margin:8px 0px 0px -8px">记录</button>
+                    </div>
+                    <br>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        ×
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel" style="color:red">
+                        计分
+                    </h4>
+
+                </div>
+                <div class="modal-body" style="font-size:18px;">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xs-6" style="color:blue">
+                                牌值:<input type="text" style="width:4em" id="cardValue">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-xs-2" style="color:blue">名</div>
+                            <div class="col-xs-2" id="countName1"></div>
+                            <div class="col-xs-2" id="countName2"></div>
+                            <div class="col-xs-2" id="countName3"></div>
+                            <div class="col-xs-2" id="countName4"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-2" style="color:blue">牌</div>
+                            <div class="col-xs-2" id="countCard0"></div>
+                            <div class="col-xs-2" id="countCard1"></div>
+                            <div class="col-xs-2" id="countCard2"></div>
+                            <div class="col-xs-2" id="countCard3"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-2" style="color:blue">钱</div>
+                            <div class="col-xs-2" id="countMoney0"></div>
+                            <div class="col-xs-2" id="countMoney1"></div>
+                            <div class="col-xs-2" id="countMoney2"></div>
+                            <div class="col-xs-2" id="countMoney3"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" id="btn_count">
+                        &nbsp;&nbsp;&nbsp;&nbsp;计分&nbsp;&nbsp;&nbsp;&nbsp;
+                    </button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">
+                        关闭
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
+    <script src="Scripts/jquery-1.10.2.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+    <script>
+        function init() {
+            totalCount0 = 0;
+            totalCount1 = 0;
+            totalCount2 = 0;
+            totalCount3 = 0;
+            round = 0;
+        }
+
+        function validate() {
+            var ok = true;
+            $(".iCount").css("border-color", "");
+            $(".iCount").each(function () {
+                var val = $(this).val();
+                if (val != "" && (isNaN(parseInt(val)) || parseInt(val) < 0)) {
+                    $(this).css("border-color", "red");
+                    ok = false;
+                }
+                
+            });
+            return ok;
+        }
+
+        $(function () {
+            init();
+
+            $(".playerName").on("blur", function () {
+                var displayerId = $(this).attr("displayer");
+                var displayer = $("#" + displayerId);
+                displayer.text($(this).val());
+            });
+
+            $("#btn_add").on("click", function () {
+                if (!validate()) return;
+                var ct = $("#countTable");
+                var record = $("<tr><td style=\"color:blue\"></td><td></td><td></td><td></td><td></td></tr>");
+                $(".iCount").each(function (i) {
+                    var tdi = i + 1;
+                    var selector = "td:eq(" + tdi + ")";
+                    var v = $(this).val();
+                    if (v == "" || v == "0" || v == null) {
+                        v = 0;
+                        record.find(selector).attr("class", "win");
+                    } else if (v >= 16) {
+                        record.find(selector).attr("class", "dob");
+                    }
+                    eval("window.totalCount" + i + "+=" + v.toString());
+                    $(this).val("");
+                });
+
+                record.find("td:eq(0)").text(++round);
+                record.find("td:eq(1)").text(totalCount0);
+                record.find("td:eq(2)").text(totalCount1);
+                record.find("td:eq(3)").text(totalCount2);
+                record.find("td:eq(4)").text(totalCount3);
+
+
+
+                ct.append(record);
+            });
+
+            $("#btn_count").on("click", function () {
+                var finalCount0 = (totalCount0 - totalCount1) + (totalCount0 - totalCount2) + (totalCount0 - totalCount3);
+                var finalCount1 = (totalCount1 - totalCount0) + (totalCount1 - totalCount2) + (totalCount1 - totalCount3);
+                var finalCount2 = (totalCount2 - totalCount0) + (totalCount2 - totalCount1) + (totalCount2 - totalCount3);
+                var finalCount3 = (totalCount3 - totalCount0) + (totalCount3 - totalCount1) + (totalCount3 - totalCount2);
+
+                var cardValue = $("#cardValue").val();
+                cardValue = (cardValue == "" || cardValue == null) ? 0 : parseInt(cardValue);
+                var finalMoney0 = cardValue * finalCount0;
+                var finalMoney1 = cardValue * finalCount1;
+                var finalMoney2 = cardValue * finalCount2;
+                var finalMoney3 = cardValue * finalCount3;
+
+                $("#countCard0").text(Math.abs(finalCount0)).css("color", finalCount0 <= 0 ? "green" : "red");
+                $("#countCard1").text(Math.abs(finalCount1)).css("color", finalCount1 <= 0 ? "green" : "red");
+                $("#countCard2").text(Math.abs(finalCount2)).css("color", finalCount2 <= 0 ? "green" : "red");
+                $("#countCard3").text(Math.abs(finalCount3)).css("color", finalCount3 <= 0 ? "green" : "red");
+
+                $("#countMoney0").text(Math.abs(finalMoney0)).css("color", finalMoney0 <= 0 ? "green" : "red");
+                $("#countMoney1").text(Math.abs(finalMoney1)).css("color", finalMoney1 <= 0 ? "green" : "red");
+                $("#countMoney2").text(Math.abs(finalMoney2)).css("color", finalMoney2 <= 0 ? "green" : "red");
+                $("#countMoney3").text(Math.abs(finalMoney3)).css("color", finalMoney3 <= 0 ? "green" : "red");
+            });
+        });
+    </script>
+
+</body></html>
